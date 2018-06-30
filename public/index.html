@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+  <style>
+    #splash {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: 6px;
+      position: fixed;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      color: #fff;
+      background-color: #f7edee;
+      opacity: 1;
+      z-index: 9999;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    #splash .wall {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 10px;
+      background: #3f51b5;
+      background: -webkit-radial-gradient(center ellipse, #4d599e 0, #3f51b5 100%);
+      background: radial-gradient(ellipse at center, #4d599e 0, #3f51b5 100%);
+      opacity: 0;
+      -webkit-animation: 1.5s fadein;
+      animation: 1.5s fadein;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    #splash .content {
+      position: relative;
+      z-index: 1;
+      font-family: 'Arial', 'Times New Roman';
+      font-weight: normal;
+    }
+
+    #splash .content::first-letter {
+      font-weight: bold;
+    }
+
+    #splash.leaving {
+      opacity: 0;
+      -webkit-transform: scale(1.4);
+      -ms-transform: scale(1.4);
+      transform: scale(1.4);
+      pointer-events: none
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>Weather</title>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+
+  <div id="splash">
+    <div class="wall"></div>
+    <div class="content">
+      Weather
+    </div>
+  </div>
+</body>
+
+</html>
