@@ -46,7 +46,7 @@ class TimeTravelView extends React.Component {
 
 const styles = {
   swipeContainer: {
-    background: 'red',
+    display: 'flex',
     flex: 1
   }
 }

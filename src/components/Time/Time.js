@@ -10,18 +10,39 @@ const Time = ({ timestamp, ...props }) => {
     <div {...props}>
       <FormattedTime
         value={asDate}
-        children={(formattedValue) => <h1>{formattedValue}</h1>}
+        children={(formattedValue) => <h1 style={styles.time}>{formattedValue}</h1>}
       />
-      {
-        !isToday && (
-          <FormattedDate
-            value={asDate}
-            children={(formattedValue) => <h2>{formattedValue}</h2>}
-          />
-        )
-      }
+      <div style={styles.dateContainer}>
+        {
+          !isToday && (
+            <FormattedDate
+              value={asDate}
+              children={(formattedValue) => <h2 style={styles.date}>{formattedValue}</h2>}
+            />
+          )
+        }
+      </div>
     </div>
   )
+}
+
+const styles = {
+  time: {
+    margin: 0,
+    fontSize: '2rem',
+    fontWeight: 'normal'
+  },
+  dateContainer: {
+    marginTop: '.5rem',
+    minHeight: '1.5rem',
+  },
+  date: {
+    margin: 0,
+    fontSize: '1rem',
+    lineHeight: '1rem',
+    fontWeight: 'normal',
+    color: 'rgba(255, 255, 255, .8)'
+  }
 }
 
 Time.propTypes = {

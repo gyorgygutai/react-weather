@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { IntlProvider } from 'react-intl'
 import enMessages from 'messages/en'
-import Weather from 'components/Weather'
+import WeatherContainer from 'containers/WeatherContainer'
 import './global.css'
 
 class Container extends Component {
@@ -12,7 +12,7 @@ class Container extends Component {
   render() {
     return (
       <IntlProvider locale="en" messages={enMessages}>
-        <Weather />
+        <WeatherContainer />
       </IntlProvider >
     )
   }
