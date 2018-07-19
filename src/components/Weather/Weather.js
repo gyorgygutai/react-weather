@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import { object, array } from 'prop-types'
 import FullScreen from 'components/FullScreen'
+import Instructions from 'components/Instructions'
 import TimeTravelView from 'components/TimeTravelView'
 import WeatherSummary from 'components/WeatherSummary'
 import WeatherBackground from 'components/WeatherBackground'
-import findClosest from 'find-closest'
+import Flex from 'flexbox-react'
+import findClosest from 'services/findClosest'
 
 class Weather extends Component {
   render() {
-    const { location, dayByDayData, forecastData } = this.props
+    const { dayByDayData, forecastData } = this.props
 
     return (
-      <FullScreen>
+      <FullScreen style={styles.root}>
         <TimeTravelView>
           {(travelledMilliseconds) => {
             const selectedTimestamp = (+ new Date()) + (travelledMilliseconds)
@@ -24,17 +26,26 @@ class Weather extends Component {
             const closestDataItem = findClosest(forecastData, selectedTimestamp / 1000, 'time') || {}
             const closestDailyItem = dayByDayData[startOfDayDate.getTime() / 1000]
 
+            const shouldShowInstructions = travelledMilliseconds < 1
+
             return (
               <WeatherBackground
+                flex={1}
+                alignItems="center"
+                flexDirection="column"
                 currentTimestamp={selectedTimestampInSecs}
                 sunriseTimestamp={closestDailyItem.sunriseTime}
                 sunsetTimestamp={closestDailyItem.sunsetTime}
               >
-                <WeatherSummary
-                  location={location}
-                  timestamp={selectedTimestamp}
-                  data={closestDataItem}
-                />
+                <Flex flex={6} style={styles.section}>
+                  <WeatherSummary
+                    timestamp={selectedTimestamp}
+                    data={closestDataItem}
+                  />
+                </Flex>
+                <Flex flex={4} alignItems="flex-end" style={styles.section}>
+                  {shouldShowInstructions && <Instructions />}
+                </Flex>
               </WeatherBackground>
             )
           }}
@@ -44,14 +55,21 @@ class Weather extends Component {
   }
 }
 
+const styles = {
+  root: {
+    userSelect: 'none'
+  },
+  section: {
+    padding: '1rem'
+  }
+}
+
 Weather.propTypes = {
-  location: object,
   forecastData: array,
   dayByDayData: object
 }
 
 Weather.defaultProps = {
-  location: {},
   forecastData: [],
   dayByDayData: {}
 }

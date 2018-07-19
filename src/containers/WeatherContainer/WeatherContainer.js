@@ -16,15 +16,15 @@ class WeatherContainer extends React.Component {
 
   async componentDidMount() {
     const response = await getForecast(this.state.location)
-    const dayByDayData = response.data.daily.data.reduce((data, currentItem) => {
+    const dayByDayData = response.daily.data.reduce((data, currentItem) => {
       data[currentItem.time] = currentItem
 
       return data
     }, {})
 
     const forecastData = [
-      ...response.data.currently,
-      ...response.data.hourly.data
+      ...response.currently,
+      ...response.hourly.data
     ]
 
     this.setState({

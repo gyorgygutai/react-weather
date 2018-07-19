@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { func, number } from 'prop-types'
 import clamp from 'lodash-es/clamp'
 import Swipeable from 'react-swipeable'
 
-class TimeTravelView extends React.Component {
+class TimeTravelView extends Component {
   constructor(props) {
     super(props)
 
@@ -34,6 +34,7 @@ class TimeTravelView extends React.Component {
   render() {
     return (
       <Swipeable
+        trackMouse
         onSwipingUp={this.flashBack}
         onSwipingDown={this.flashForward}
         style={styles.swipeContainer}
@@ -58,12 +59,12 @@ TimeTravelView.propTypes = {
   maxTimestamp: number
 }
 
-const twoDaysInMs = 172800000
+const threeDaysInMs = 259200000
 
 TimeTravelView.defaultProps = {
   speed: 10000,
   initialTimestamp: 0,
-  maxTimestamp: twoDaysInMs
+  maxTimestamp: threeDaysInMs
 }
 
 export default TimeTravelView

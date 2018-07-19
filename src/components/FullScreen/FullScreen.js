@@ -1,16 +1,12 @@
 import React from 'react'
+import Flex from 'flexbox-react'
 
-const FullScreen = ({ style, ...props }) => (
-  <div {...props} style={{ ...styles.root, ...style }} />
+const FullScreen = (props) => (
+  <Flex
+    {...props}
+    height="100%"
+    alignItems="stretch"
+  />
 )
-
-const styles = {
-  root: {
-    height: '100%',
-    display: 'flex',
-    alignItems: 'stretch',
-    justifyContent: 'stretch'
-  }
-}
 
 export default FullScreen

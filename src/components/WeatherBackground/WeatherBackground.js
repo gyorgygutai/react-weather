@@ -1,4 +1,5 @@
 import React from 'react'
+import Flex from 'flexbox-react'
 import { object, node, number } from 'prop-types'
 
 const WeatherBackground = ({
@@ -7,7 +8,9 @@ const WeatherBackground = ({
   const hasDaylight = currentTimestamp >= sunriseTimestamp && currentTimestamp <= sunsetTimestamp
 
   return (
-    <div
+    <Flex
+      alignItems="stretch"
+      flexDirection="column"
       {...props}
       style={{
         ...styles.root,
@@ -16,16 +19,12 @@ const WeatherBackground = ({
       }}
     >
       {children}
-    </div>
+    </Flex>
   )
 }
 
 const styles = {
   root: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
     transition: 'all 3s ease-in-out',
   },
   day: {
