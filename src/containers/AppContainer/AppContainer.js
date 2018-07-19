@@ -4,11 +4,7 @@ import enMessages from 'messages/en'
 import WeatherContainer from 'containers/WeatherContainer'
 import './global.css'
 
-class Container extends Component {
-  componentDidCatch(error, info) {
-    console.log(error, info)
-  }
-
+class AppContainer extends Component {
   render() {
     return (
       <IntlProvider locale="en" messages={enMessages}>
@@ -18,4 +14,4 @@ class Container extends Component {
   }
 }
 
-export default Container
+export default AppContainer

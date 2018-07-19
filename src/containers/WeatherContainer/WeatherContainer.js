@@ -1,9 +1,12 @@
 import React from 'react'
 import Weather from 'components/Weather'
+import WeatherError from 'components/WeatherError'
+import WeatherLoader from 'components/WeatherLoader'
 import { getForecast } from 'services/darksky'
 
 class WeatherContainer extends React.Component {
   state = {
+    error: null,
     location: {
       lat: 47.5,
       lng: 19.0833,
@@ -15,29 +18,40 @@ class WeatherContainer extends React.Component {
   }
 
   async componentDidMount() {
-    const response = await getForecast(this.state.location)
-    const dayByDayData = response.daily.data.reduce((data, currentItem) => {
-      data[currentItem.time] = currentItem
+    try {
+      const response = await getForecast(this.state.location)
+      const dayByDayData = response.daily.data.reduce((data, currentItem) => {
+        data[currentItem.time] = currentItem
 
-      return data
-    }, {})
+        return data
+      }, {})
 
-    const forecastData = [
-      ...response.currently,
-      ...response.hourly.data
-    ]
+      const forecastData = [
+        ...response.currently,
+        ...response.hourly.data
+      ]
 
-    this.setState({
-      dayByDayData,
-      forecastData,
-      isFetching: false
-    })
+      this.setState({
+        dayByDayData,
+        forecastData,
+        isFetching: false
+      })
+    } catch (error) {
+      this.setState({
+        error,
+        isFetching: false
+      })
+    }
   }
 
   render() {
-    const { isFetching, ...state } = this.state
+    const { isFetching, error, ...state } = this.state
 
-    return isFetching ? null : <Weather {...state} />
+    if (error) {
+      return <WeatherError />
+    }
+
+    return isFetching ? <WeatherLoader /> : <Weather {...state} />
   }
 }
 
